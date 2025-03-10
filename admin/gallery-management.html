@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdBlast Admin - Gallery Management</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <img src="../Logo.png" alt="AdBlast Logo" class="admin-logo">
+            <h3>AdBlast Admin</h3>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="ad-management.html"><i class="fas fa-ad"></i> Ad Management</a></li>
+            <li class="active"><a href="gallery-management.html"><i class="fas fa-images"></i> Gallery Management</a>
+            </li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <div class="admin-header">
+            <h2><i class="fas fa-images"></i> Gallery Management</h2>
+            <div class="user-info">
+                <span>Welcome, Admin</span>
+                <img src="https://via.placeholder.com/40" alt="Admin" class="user-avatar">
+            </div>
+        </div>
+
+        <div class="dashboard-row">
+            <div class="dashboard-card full-width">
+                <div class="card-header">
+                    <h3>Add New Gallery Image</h3>
+                </div>
+                <div class="card-content">
+                    <form id="add-gallery-image" class="admin-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="image-url">Image URL</label>
+                                <input type="url" id="image-url" name="image-url"
+                                    placeholder="https://example.com/image.jpg" required>
+                                <p class="input-help">Enter the URL of the image or upload one below.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image-upload">Or Upload Image</label>
+                                <input type="file" id="image-upload" name="image-upload" accept="image/*">
+                                <p class="input-help">Supported formats: JPG, PNG, GIF. Max size: 2MB.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="image-title">Title</label>
+                                <input type="text" id="image-title" name="image-title" placeholder="Image Title"
+                                    required>
+                                <p class="input-help">A short, descriptive title for the image.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image-category">Category</label>
+                                <select id="image-category" name="image-category" required>
+                                    <option value="">Select a category</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="food">Food</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <p class="input-help">The category this image belongs to.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image-description">Description</label>
+                            <textarea id="image-description" name="image-description" placeholder="Image Description"
+                                rows="3" required></textarea>
+                            <p class="input-help">A brief description of the image (max 200 characters).</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="add-to-carousel">Add to Main Carousel?</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="add-to-carousel" name="add-to-carousel">
+                                <span class="toggle-slider"></span>
+                            </div>
+                            <p class="input-help">If checked, this image will be added to the main carousel on the
+                                landing page.</p>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="admin-btn primary">Add Image</button>
+                            <button type="reset" class="admin-btn">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-row">
+            <div class="dashboard-card full-width">
+                <div class="card-header">
+                    <h3>Gallery Images</h3>
+                    <div class="card-actions">
+                        <div class="search-box">
+                            <input type="text" id="search-gallery" placeholder="Search images...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <select id="filter-category">
+                            <option value="">All Categories</option>
+                            <option value="travel">Travel</option>
+                            <option value="technology">Technology</option>
+                            <option value="food">Food</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="nature">Nature</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="gallery-items-grid" id="gallery-items">
+                        <!-- Demo images - would be populated dynamically -->
+                        <div class="admin-gallery-item">
+                            <div class="gallery-img-container">
+                                <img src="https://source.unsplash.com/300x200/?travel" alt="Travel Destination">
+                                <div class="gallery-item-actions">
+                                    <button class="gallery-action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="gallery-action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="gallery-action-btn feature"><i class="fas fa-star"></i></button>
+                                </div>
+                            </div>
+                            <div class="gallery-item-info">
+                                <h4>Travel Destination</h4>
+                                <p>Exotic beach in Bali, Indonesia.</p>
+                                <span class="gallery-category travel">Travel</span>
+                                <span class="gallery-status featured">In Carousel</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-gallery-item">
+                            <div class="gallery-img-container">
+                                <img src="https://source.unsplash.com/300x200/?technology" alt="Technology">
+                                <div class="gallery-item-actions">
+                                    <button class="gallery-action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="gallery-action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="gallery-action-btn feature"><i class="fas fa-star"></i></button>
+                                </div>
+                            </div>
+                            <div class="gallery-item-info">
+                                <h4>Latest Gadget</h4>
+                                <p>Cutting-edge smartphone technology.</p>
+                                <span class="gallery-category technology">Technology</span>
+                                <span class="gallery-status">Gallery Only</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-gallery-item">
+                            <div class="gallery-img-container">
+                                <img src="https://source.unsplash.com/300x200/?food" alt="Food">
+                                <div class="gallery-item-actions">
+                                    <button class="gallery-action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="gallery-action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="gallery-action-btn feature"><i class="fas fa-star"></i></button>
+                                </div>
+                            </div>
+                            <div class="gallery-item-info">
+                                <h4>Gourmet Dish</h4>
+                                <p>Delicious pasta prepared by a chef.</p>
+                                <span class="gallery-category food">Food</span>
+                                <span class="gallery-status">Gallery Only</span>
+                            </div>
+                        </div>
+
+                        <div class="admin-gallery-item">
+                            <div class="gallery-img-container">
+                                <img src="https://source.unsplash.com/300x200/?fashion" alt="Fashion">
+                                <div class="gallery-item-actions">
+                                    <button class="gallery-action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="gallery-action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="gallery-action-btn feature"><i class="fas fa-star"></i></button>
+                                </div>
+                            </div>
+                            <div class="gallery-item-info">
+                                <h4>Fashion Trend</h4>
+                                <p>Latest style from Paris Fashion Week.</p>
+                                <span class="gallery-category fashion">Fashion</span>
+                                <span class="gallery-status featured">In Carousel</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn next">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Image Modal -->
+    <div class="admin-modal" id="edit-image-modal">
+        <div class="admin-modal-content">
+            <span class="admin-modal-close">&times;</span>
+            <h3>Edit Gallery Image</h3>
+            <form id="edit-gallery-image" class="admin-form">
+                <div class="form-group">
+                    <label for="edit-image-url">Image URL</label>
+                    <input type="url" id="edit-image-url" name="edit-image-url" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-image-title">Title</label>
+                    <input type="text" id="edit-image-title" name="edit-image-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-image-category">Category</label>
+                    <select id="edit-image-category" name="edit-image-category" required>
+                        <option value="travel">Travel</option>
+                        <option value="technology">Technology</option>
+                        <option value="food">Food</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="nature">Nature</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-image-description">Description</label>
+                    <textarea id="edit-image-description" name="edit-image-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-add-to-carousel">Add to Main Carousel?</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="edit-add-to-carousel" name="edit-add-to-carousel">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+                <input type="hidden" id="edit-image-id" name="edit-image-id">
+                <div class="form-actions">
+                    <button type="submit" class="admin-btn primary">Save Changes</button>
+                    <button type="button" class="admin-btn" id="cancel-edit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if user is logged in
+            const adminToken = localStorage.getItem('adblast_admin_token');
+            if (!adminToken) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Logout functionality
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                localStorage.removeItem('adblast_admin_token');
+                window.location.href = 'login.html';
+            });
+
+            // Image Upload Preview
+            const imageUpload = document.getElementById('image-upload');
+            const imageUrl = document.getElementById('image-url');
+
+            imageUpload.addEventListener('change', function (e) {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        // In a real app, this would upload to a server and get a URL
+                        // For demo, we just show a preview and disable the URL field
+                        imageUrl.value = "Image will be uploaded";
+                        imageUrl.disabled = true;
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Add Image Form
+            const addGalleryForm = document.getElementById('add-gallery-image');
+            addGalleryForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Get form values
+                const imageUrl = document.getElementById('image-url').value;
+                const imageTitle = document.getElementById('image-title').value;
+                const imageCategory = document.getElementById('image-category').value;
+                const imageDescription = document.getElementById('image-description').value;
+                const addToCarousel = document.getElementById('add-to-carousel').checked;
+
+                // In a real app, this would send to a server
+                // For demo purposes, we'll just show a success message
+                alert(`Image "${imageTitle}" added successfully!`);
+
+                // Reset the form
+                addGalleryForm.reset();
+                document.getElementById('image-url').disabled = false;
+            });
+
+            // Edit Image Modal
+            const editButtons = document.querySelectorAll('.gallery-action-btn.edit');
+            const editModal = document.getElementById('edit-image-modal');
+            const closeModal = document.querySelector('.admin-modal-close');
+            const cancelEdit = document.getElementById('cancel-edit');
+
+            // Open modal when edit button is clicked
+            editButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const galleryItem = this.closest('.admin-gallery-item');
+                    const title = galleryItem.querySelector('h4').textContent;
+                    const description = galleryItem.querySelector('p').textContent;
+                    const category = galleryItem.querySelector('.gallery-category').classList[1];
+                    const isFeatured = galleryItem.querySelector('.gallery-status').classList.contains('featured');
+                    const imageUrl = galleryItem.querySelector('img').src;
+
+                    // Populate edit form
+                    document.getElementById('edit-image-url').value = imageUrl;
+                    document.getElementById('edit-image-title').value = title;
+                    document.getElementById('edit-image-description').value = description;
+                    document.getElementById('edit-image-category').value = category;
+                    document.getElementById('edit-add-to-carousel').checked = isFeatured;
+
+                    // Show modal
+                    editModal.style.display = 'block';
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', function () {
+                editModal.style.display = 'none';
+            });
+
+            cancelEdit.addEventListener('click', function () {
+                editModal.style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function (e) {
+                if (e.target === editModal) {
+                    editModal.style.display = 'none';
+                }
+            });
+
+            // Edit form submission
+            const editGalleryForm = document.getElementById('edit-gallery-image');
+            editGalleryForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Get form values
+                const imageUrl = document.getElementById('edit-image-url').value;
+                const imageTitle = document.getElementById('edit-image-title').value;
+
+                // In a real app, this would send to a server
+                // For demo purposes, we'll just show a success message
+                alert(`Image "${imageTitle}" updated successfully!`);
+
+                // Close the modal
+                editModal.style.display = 'none';
+            });
+
+            // Delete button functionality
+            const deleteButtons = document.querySelectorAll('.gallery-action-btn.delete');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const galleryItem = this.closest('.admin-gallery-item');
+                    const title = galleryItem.querySelector('h4').textContent;
+
+                    if (confirm(`Are you sure you want to delete "${title}"?`)) {
+                        // In a real app, this would send to a server
+                        // For demo, we'll just remove the item from the DOM
+                        galleryItem.remove();
+                        alert(`Image "${title}" deleted successfully!`);
+                    }
+                });
+            });
+
+            // Feature/unfeature button functionality
+            const featureButtons = document.querySelectorAll('.gallery-action-btn.feature');
+            featureButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const galleryItem = this.closest('.admin-gallery-item');
+                    const statusElement = galleryItem.querySelector('.gallery-status');
+                    const title = galleryItem.querySelector('h4').textContent;
+
+                    if (statusElement.classList.contains('featured')) {
+                        statusElement.classList.remove('featured');
+                        statusElement.textContent = 'Gallery Only';
+                        alert(`"${title}" removed from carousel.`);
+                    } else {
+                        statusElement.classList.add('featured');
+                        statusElement.textContent = 'In Carousel';
+                        alert(`"${title}" added to carousel!`);
+                    }
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-gallery');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const galleryItems = document.querySelectorAll('.admin-gallery-item');
+
+                galleryItems.forEach(item => {
+                    const title = item.querySelector('h4').textContent.toLowerCase();
+                    const description = item.querySelector('p').textContent.toLowerCase();
+
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Category filter
+            const categoryFilter = document.getElementById('filter-category');
+            categoryFilter.addEventListener('change', function () {
+                const selectedCategory = this.value;
+                const galleryItems = document.querySelectorAll('.admin-gallery-item');
+
+                galleryItems.forEach(item => {
+                    const categoryElement = item.querySelector('.gallery-category');
+
+                    if (!selectedCategory || categoryElement.classList.contains(selectedCategory)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
